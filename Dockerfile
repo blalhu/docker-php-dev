@@ -1,8 +1,9 @@
-FROM pelso/php:7.1
+FROM pelso/php:7.2
 
 RUN apt update \
  && apt install -y \
-    php7.1-xdebug \
+    php7.2-dev \
+    php-pear \
     htop \
     vim \
     iputils-ping \
@@ -12,10 +13,15 @@ RUN apt update \
     postgresql-client \
     mc \
     ranger \
-    wget
+    wget \
+ && pear config-set preferred_state alpha \
+ && pecl install xdebug
 
-COPY xdebug.ini /etc/php/7.1/mods-available/xdebug.ini
+COPY xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
 
-CMD service php7.1-fpm start \
- && service php7.1-fpm restart \
+RUN ln -s /etc/php/7.2/mods-available/xdebug.ini /etc/php/7.2/fpm/conf.d/20-xdebug.ini \
+ && ln -s /etc/php/7.2/mods-available/xdebug.ini /etc/php/7.2/cli/conf.d/20-xdebug.ini
+
+CMD service php7.2-fpm start \
+ && service php7.2-fpm restart \
  && sleep infinity
