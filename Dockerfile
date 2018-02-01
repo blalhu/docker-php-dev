@@ -1,4 +1,4 @@
-FROM pelso/php:7.1
+FROM pelso/php:7.0
 
 RUN apt update \
  && apt install -y \
@@ -13,6 +13,6 @@ RUN apt update \
     ranger \
     wget
 
-CMD service php7.1-fpm start \
- && service php7.1-fpm restart \
+CMD service php7.0-fpm start \
+ && service php7.0-fpm restart \
  && sleep infinity
