@@ -13,6 +13,10 @@ RUN apt update \
     ranger \
     wget
 
+COPY composer-installer.sh /home/app/composer-installer.sh
+RUN /home/app/composer-installer.sh \
+    && rm /home/app/composer-installer.sh
+
 CMD service php7.2-fpm start \
  && service php7.2-fpm restart \
  && sleep infinity
