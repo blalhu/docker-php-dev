@@ -1,4 +1,4 @@
-FROM pelso/php:7.0
+FROM pelso/php:7.1
 
 RUN apt update \
  && apt install -y \
@@ -24,6 +24,6 @@ RUN curl -LO https://deployer.org/deployer.phar \
     && mv deployer.phar /usr/local/bin/dep \
     && chmod +x /usr/local/bin/dep
 
-CMD service php7.0-fpm start \
- && service php7.0-fpm restart \
+CMD service php7.1-fpm start \
+ && service php7.1-fpm restart \
  && sleep infinity
