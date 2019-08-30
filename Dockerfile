@@ -1,12 +1,12 @@
-FROM pelso/php:7.2
+FROM pelso/php:7.3
 
-RUN apt update \
- && apt install -y \
+RUN apt-get update \
+ && apt-get install -y \
     htop \
     vim \
     iputils-ping \
     net-tools \
-    mysql-client \
+    mariadb-client \
     sqlite3 \
     postgresql-client \
     mc \
@@ -24,6 +24,7 @@ RUN curl -LO https://deployer.org/deployer.phar \
     && mv deployer.phar /usr/local/bin/dep \
     && chmod +x /usr/local/bin/dep
 
-CMD service php7.2-fpm start \
- && service php7.2-fpm restart \
+CMD service php7.3-fpm start \
+ && service php7.3-fpm restart \
  && sleep infinity
+
